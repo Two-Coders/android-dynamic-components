@@ -2,16 +2,17 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
-ext.bintrayPublishVersion = libEmptyStateRecyclerViewVersion
+ext.bintrayPublishVersion = libDynamicTextVersion
 apply from: '../bintrayConfig.gradle'
 
 android {
     compileSdkVersion androidCompileSdkVersion
 
+
     defaultConfig {
         minSdkVersion androidMinSdkVersion
         targetSdkVersion androidTargerSdkVersion
-        versionName libEmptyStateRecyclerViewVersion
+        versionName libDynamicTextVersion
 
         consumerProguardFiles 'consumer-rules.pro'
     }
@@ -21,11 +22,15 @@ android {
             minifyEnabled false
         }
     }
+
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation "androidx.annotation:annotation:1.1.0"
 }

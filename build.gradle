@@ -5,8 +5,8 @@ buildscript {
         organization = 'bio007'
         groupIdentifier = 'com.kacera'
         projectIdentifier = 'utils'
-        projectWebsite = 'https://bitbucket.org/bio007/emptystaterecyclerview'
-        projectDescription = 'RecyclerView with support for empty state view.'
+        projectWebsite = 'https://bitbucket.org/bio007/utilities'
+        projectDescription = 'Project containing utility libraries for common use cases in Android development.'
         projectLicences = ['MIT']
 
         androidMinSdkVersion = 21
@@ -14,6 +14,7 @@ buildscript {
         androidTargerSdkVersion = androidCompileSdkVersion
 
         libEmptyStateRecyclerViewVersion = '1.0.0'
+        libDynamicTextVersion = '1.0.0'
 
         kotlin_version = '1.3.61'
     }
