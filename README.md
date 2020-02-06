@@ -13,8 +13,6 @@ Use the library adding `implementation 'com.kacera:dynamictext:1.0.1'` into your
 ### Usage
 One of the usage cases this comes handy is when you want to conditionaly set either String text or StringRes id to one TextView using data-binding.  
 
-#  
-
 Code in ViewModel
 ```
 val title = MutableLiveData<DynamicText>()
