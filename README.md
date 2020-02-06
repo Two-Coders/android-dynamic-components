@@ -15,7 +15,7 @@ One of the usage cases this comes handy is when you want to conditionaly set eit
 
 #  
 
-Code in ViewModel:
+Code in ViewModel
 ```
 val title = MutableLiveData<DynamicText>()
 
