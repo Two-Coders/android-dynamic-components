@@ -8,4 +8,4 @@ Use the library adding `implementation 'com.kacera:emptystaterecyclerview:1.0.0'
 ## DynamicText
 Data class which can be used to combine String data with string resource identifiers.
 
-Use the library adding `implementation 'com.kacera:dynamictext:1.0.0'` into your build.gradle file.
+Use the library adding `implementation 'com.kacera:dynamictext:1.0.1'` into your build.gradle file.
