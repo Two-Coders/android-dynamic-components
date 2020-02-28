@@ -1,0 +1,7 @@
+<resources>
+    <string name="simple_string">Simple test string</string>
+    <string name="string_with_string_variable">Text: %s</string>
+    <string name="string_with_multiple_variables">Text: %s %s %d</string>
+    <string name="string_with_int_variable">Number: %d </string>
+    <string name="string_with_decimal_variable">Number: %.2f </string>
+</resources>
