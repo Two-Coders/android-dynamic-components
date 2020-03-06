@@ -29,29 +29,19 @@ open class DynamicText private constructor(
         val EMPTY = DynamicText()
 
         @JvmStatic
-        fun from(@StringRes resId: Int): DynamicText {
-            return DynamicText(resId)
-        }
+        fun from(@StringRes resId: Int) = DynamicText(resId)
 
         @JvmStatic
-        fun from(text: String): DynamicText {
-            return DynamicText(NO_ID, text)
-        }
+        fun from(text: String) = DynamicText(NO_ID, text)
 
         @JvmStatic
-        fun from(@StringRes resId: Int, text: String): DynamicText {
-            return DynamicText(resId, text)
-        }
+        fun from(@StringRes resId: Int, text: String) = DynamicText(resId, text)
 
         @JvmStatic
-        fun from(@StringRes resId: Int, number: Number): DynamicText {
-            return DynamicText(resId, number)
-        }
+        fun from(@StringRes resId: Int, number: Number) = DynamicText(resId, number)
 
         @JvmStatic
-        fun from(@StringRes resId: Int, vararg args: Any): DynamicText {
-            return DynamicText(resId, *args)
-        }
+        fun from(@StringRes resId: Int, vararg args: Any) = DynamicText(resId, *args)
 
         @JvmField
         val CREATOR = object : Parcelable.Creator<DynamicText> {
