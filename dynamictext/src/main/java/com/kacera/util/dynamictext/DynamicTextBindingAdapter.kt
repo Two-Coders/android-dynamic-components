@@ -5,10 +5,10 @@ import androidx.databinding.BindingAdapter
 
 @BindingAdapter(value = ["android:text"])
 fun setTextHolder(textView: TextView, textHolder: DynamicText?) {
-    textHolder?.let {
-        textView.text = it.getText(textView.context)
-        return
-    }
+    textView.text = textHolder?.getText(textView.context)
+}
 
-    textView.text = null
+@BindingAdapter(value = ["android:hint"])
+fun setHint(textView: TextView, textHolder: DynamicText?) {
+    textView.hint = textHolder?.getText(textView.context)
 }
