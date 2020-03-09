@@ -34,6 +34,12 @@ class DynamicTextTest {
     }
 
     @Test
+    fun dynamicTextWithStringFormatReturnsFormattedText() {
+        val expectedText = "Formatted Text with 45 and 0.3450 and everything"
+        Assert.assertEquals(expectedText, DynamicText.from("Formatted Text with %d and %.4f and %s", 45, 0.345, "everything").getText(context))
+    }
+
+    @Test
     fun dynamicTextWithMultipleTextDataReturnsJoinedText() {
         val expectedText = "Success Text"
         Assert.assertEquals(expectedText, DynamicText.from(NO_ID ,"Success", "Text").getText(context))
