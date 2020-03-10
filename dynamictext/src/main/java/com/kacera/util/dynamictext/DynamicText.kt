@@ -35,6 +35,9 @@ open class DynamicText private constructor(
         fun from(text: String) = DynamicText(NO_ID, text)
 
         @JvmStatic
+        fun from(format: String, vararg args: Any) = from(String.format(format, *args))
+
+        @JvmStatic
         fun from(@StringRes resId: Int, text: String) = DynamicText(resId, text)
 
         @JvmStatic
