@@ -5,6 +5,7 @@ import android.os.Parcel
 import android.os.Parcelable
 import android.view.View.NO_ID
 import androidx.annotation.StringRes
+import com.kacera.util.dynamictext.extensions.getText
 
 /**
  * Handy class which can be used to bind text data to views displaying them.
@@ -59,6 +60,18 @@ open class DynamicText private constructor(
     }
 
     open fun getText(context: Context): String {
+        if (textResource != NO_ID && args.isNotEmpty()) {
+            return context.getText(textResource, *args).toString()
+        }
+
+        if (textResource != NO_ID) {
+            return context.getText(textResource).toString()
+        }
+
+        return args.joinToString(separator = " ") { it.toString() }
+    }
+
+    open fun getString(context: Context): String {
         if (textResource != NO_ID && args.isNotEmpty()) {
             return context.getString(textResource, *args)
         }
