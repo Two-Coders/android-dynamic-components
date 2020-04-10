@@ -58,13 +58,13 @@ open class DynamicText private constructor(
         }
     }
 
-    open fun getText(context: Context): String {
+    open fun getText(context: Context): CharSequence {
         if (textResource != NO_ID && args.isNotEmpty()) {
             return context.getString(textResource, *args)
         }
 
         if (textResource != NO_ID) {
-            return context.getString(textResource)
+            return context.getText(textResource)
         }
 
         return args.joinToString(separator = " ") { it.toString() }

@@ -8,7 +8,7 @@ Use the library adding `implementation 'com.kacera:emptystaterecyclerview:1.0.0'
 ## DynamicText
 Data class which can be used to combine String data with string resource identifiers.
 
-Use the library adding `implementation 'com.kacera:dynamictext:1.2.1'` into your build.gradle file.
+Use the library adding `implementation 'com.kacera:dynamictext:2.0.0'` into your build.gradle file.
 
 ### Usage
 One of the usage cases this comes handy is when you want to conditionaly set either String text or StringRes id to one TextView using data-binding.  

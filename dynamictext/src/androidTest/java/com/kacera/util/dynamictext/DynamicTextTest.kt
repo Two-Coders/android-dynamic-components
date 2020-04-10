@@ -2,7 +2,9 @@ package com.kacera.util.dynamictext
 
 import android.content.Context
 import android.os.Parcel
+import android.text.Spanned
 import android.view.View.NO_ID
+import android.widget.TextView
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.kacera.util.dynamictext.test.R
@@ -68,6 +70,25 @@ class DynamicTextTest {
 
         Assert.assertEquals("Text: $variable1", DynamicText.from(R.string.string_with_string_variable, variable1).getText(context))
         Assert.assertEquals("Text: $variable1 $variable2 $variable3", DynamicText.from(R.string.string_with_multiple_variables, variable1, variable2, variable3).getText(context))
+    }
+
+    @Test
+    fun dynamicTextWithHtmlContent() {
+        Assert.assertTrue(DynamicText.from(R.string.html_unescaped).getText(context) is Spanned)
+        Assert.assertFalse(DynamicText.from(R.string.html_escaped).getText(context) is Spanned)
+    }
+
+    @Test
+    fun htmlContentBinding() {
+        val textView = TextView(context)
+        setHtmlTextHolder(textView, DynamicText.from(R.string.html_escaped))
+        Assert.assertTrue(textView.text is Spanned)
+
+        setHtmlTextHolder(textView, DynamicText.from(R.string.html_unescaped))
+        Assert.assertTrue(textView.text is Spanned)
+
+        setHtmlTextHolder(textView, DynamicText.from(R.string.no_html))
+        Assert.assertFalse(textView.text is Spanned)
     }
 
     @Test

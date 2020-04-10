@@ -4,4 +4,8 @@
     <string name="string_with_multiple_variables">Text: %s %s %d</string>
     <string name="string_with_int_variable">Number: %d </string>
     <string name="string_with_decimal_variable">Number: %.2f </string>
+
+    <string name="html_escaped">This is &lt;b&gt;bold&lt;/b&gt; html</string>
+    <string name="html_unescaped">This is <b>bold</b> html</string>
+    <string name="no_html">This is bold html</string>
 </resources>
