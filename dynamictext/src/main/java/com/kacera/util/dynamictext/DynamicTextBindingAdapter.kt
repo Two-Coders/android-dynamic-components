@@ -1,5 +1,6 @@
 package com.kacera.util.dynamictext
 
+import android.util.Log
 import android.widget.TextView
 import androidx.core.text.HtmlCompat
 import androidx.databinding.BindingAdapter
@@ -12,7 +13,14 @@ fun setTextHolder(textView: TextView, textHolder: DynamicText?) {
 @BindingAdapter(value = ["android:htmlText"])
 fun setHtmlTextHolder(textView: TextView, textHolder: DynamicText?) {
     textView.text = textHolder?.let {
-        HtmlCompat.fromHtml(it.getText(textView.context), HtmlCompat.FROM_HTML_MODE_LEGACY)
+        val text = it.getText(textView.context)
+        val html = HtmlCompat.fromHtml(text.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY)
+        return@let if (html.getSpans(0, text.length, Object::class.java).isEmpty()) {
+            if (text is String) Log.w("DynamicText", "No HTML tags found in the string provided! Maybe you forgot to escape HTML tags?")
+            text
+        } else {
+            html
+        }
     }
 }
 
