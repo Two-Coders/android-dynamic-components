@@ -14,7 +14,7 @@ buildscript {
         androidTargerSdkVersion = androidCompileSdkVersion
 
         libEmptyStateRecyclerViewVersion = '1.0.0'
-        libDynamicTextVersion = '2.0.0'
+        libDynamicTextVersion = '2.1.0'
 
         kotlin_version = '1.3.70'
         junit_version = '4.12'

@@ -79,6 +79,41 @@ class DynamicTextTest {
     }
 
     @Test
+    fun pluralTextNoFormatNumberReturnsCorrectText() {
+        var quantity = 5
+        var expectedText = "$quantity months"
+        Assert.assertEquals(expectedText, "$quantity ${DynamicText.plural(R.plurals.months_no_number, Quantity(quantity)).getText(context)}")
+
+        quantity = 1
+        expectedText = "$quantity month"
+        Assert.assertEquals(expectedText, "$quantity ${DynamicText.plural(R.plurals.months_no_number, Quantity(quantity)).getText(context)}")
+    }
+
+    @Test
+    fun pluralTextWithFormatNumberReturnsCorrectText() {
+        var quantity = 5
+        var expectedText = "$quantity months"
+        Assert.assertEquals(expectedText, DynamicText.plural(R.plurals.months_with_number, Quantity(quantity, true)).getText(context))
+
+        quantity = 1
+        expectedText = "$quantity month"
+        Assert.assertEquals(expectedText, DynamicText.plural(R.plurals.months_with_number, Quantity(quantity, true)).getText(context))
+    }
+
+    @Test
+    fun pluralTextWithFormatNumberAndParameterReturnsCorrectText() {
+        var quantity = 5
+        var parameter = 12
+        var expectedText = "$quantity months out of $parameter"
+        Assert.assertEquals(expectedText, DynamicText.plural(R.plurals.months_with_number_and_parameter, Quantity(quantity, true), parameter).getText(context))
+
+        quantity = 1
+        parameter = 6
+        expectedText = "$quantity month out of $parameter"
+        Assert.assertEquals(expectedText, DynamicText.plural(R.plurals.months_with_number_and_parameter, Quantity(quantity, true), parameter).getText(context))
+    }
+
+    @Test
     fun htmlContentBinding() {
         val textView = TextView(context)
         setHtmlTextHolder(textView, DynamicText.from(R.string.html_escaped))
@@ -114,5 +149,27 @@ class DynamicTextTest {
 
         Assert.assertEquals(text1, text2)
         Assert.assertEquals(text1.getText(context), text2.getText(context))
+    }
+
+    @Test
+    fun recreatePluralDynamicTextFromParcel() {
+        val p1 = Parcel.obtain()
+        val p2 = Parcel.obtain()
+
+        val text1 = DynamicText.plural(R.plurals.months_with_number_and_parameter, Quantity(3, true), 12)
+
+        val bytes = with(p1) {
+            text1.writeToParcel(this, 0)
+            marshall()
+        }
+
+        p2.unmarshall(bytes, 0, bytes.size)
+        p2.setDataPosition(0)
+
+        val text2 = PluralDynamicText.CREATOR.createFromParcel(p2)
+
+        Assert.assertEquals(text1, text2)
+        Assert.assertEquals(text1.getText(context), text2.getText(context))
+        Assert.assertEquals("3 months out of 12", text2.getText(context))
     }
 }

@@ -8,4 +8,19 @@
     <string name="html_escaped">This is &lt;b&gt;bold&lt;/b&gt; html</string>
     <string name="html_unescaped">This is <b>bold</b> html</string>
     <string name="no_html">This is bold html</string>
+
+    <plurals name="months_with_number">
+        <item quantity="one">%d month</item>
+        <item quantity="other">%d months</item>
+    </plurals>
+
+    <plurals name="months_no_number">
+        <item quantity="one">month</item>
+        <item quantity="other">months</item>
+    </plurals>
+
+    <plurals name="months_with_number_and_parameter">
+        <item quantity="one">%1$d month out of %2$d</item>
+        <item quantity="other">%1$d months out of %2$d</item>
+    </plurals>
 </resources>

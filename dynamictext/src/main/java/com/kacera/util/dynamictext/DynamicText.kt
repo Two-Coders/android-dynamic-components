@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Parcel
 import android.os.Parcelable
 import android.view.View.NO_ID
+import androidx.annotation.PluralsRes
 import androidx.annotation.StringRes
 
 /**
@@ -14,12 +15,22 @@ import androidx.annotation.StringRes
  * obtain the final text output
  */
 @Suppress("unused", "MemberVisibilityCanBePrivate")
-open class DynamicText private constructor(
-    @StringRes private var textResource: Int = NO_ID,
-    private vararg var args: Any? = emptyArray()
-) : Parcelable {
+open class DynamicText : Parcelable {
 
-    private constructor(parcel: Parcel) : this(
+    @StringRes
+    protected val textResource: Int
+
+    protected var args: Array<out Any?>
+
+    protected constructor(
+        @StringRes textResource: Int = NO_ID,
+        vararg args: Any? = emptyArray()
+    ) {
+        this.textResource = textResource
+        this.args = args
+    }
+
+    protected constructor(parcel: Parcel) : this(
         parcel.readInt(),
         *(parcel.readArray(ClassLoader.getSystemClassLoader()) ?: emptyArray())
     )
@@ -45,6 +56,10 @@ open class DynamicText private constructor(
 
         @JvmStatic
         fun from(@StringRes resId: Int, vararg args: Any) = DynamicText(resId, *args)
+
+        @JvmStatic
+        fun plural(@PluralsRes resId: Int, quantity: Quantity, vararg args: Any): DynamicText =
+            PluralDynamicText(resId, quantity, *args)
 
         @JvmField
         val CREATOR = object : Parcelable.Creator<DynamicText> {
