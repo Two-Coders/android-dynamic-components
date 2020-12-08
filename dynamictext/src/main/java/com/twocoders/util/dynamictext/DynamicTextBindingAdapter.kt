@@ -1,4 +1,4 @@
-package com.kacera.util.dynamictext
+package com.twocoders.util.dynamictext
 
 import android.util.Log
 import android.widget.TextView
