@@ -1,20 +1,13 @@
-# Repository containing utility libraries for common use cases in Android development
-
-## EmptyStateRecyclerView
-RecyclerView with support for empty state view.
-
-Use the library adding `implementation 'com.kacera:emptystaterecyclerview:1.0.0'` into your build.gradle file.
-
 ## DynamicText
 Data class which can be used to combine String data with string resource identifiers. Can be used for regular strings or plurals.
 
-Use the library adding `implementation 'com.kacera:dynamictext:2.1.0'` into your build.gradle file.
+Use the library adding `implementation 'com.twocoders:dynamictext:2.1.0'` into your build.gradle file.
 
 ### Usage
-One of the usage cases this comes handy is when you want to conditionaly set either String text or StringRes id to one TextView using data-binding.  
+One of the usage cases this comes handy is when you want to conditionally set either String text or StringRes id to one TextView using data-binding.  
 
 Code in ViewModel
-```
+```kotlin
 val title = MutableLiveData<DynamicText>()
 
 fun onDataLoaded(response: Respose) {
@@ -27,8 +20,7 @@ fun onDataLoaded(response: Respose) {
 ```
 
 Code in layout file
-```
+```xml
 <TextView
-    ...
-    android:text="@{viewModel.title}"/>
+    android:text="@{viewModel.title}" />
 ```

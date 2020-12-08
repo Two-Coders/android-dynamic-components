@@ -1,4 +1,4 @@
-package com.kacera.util.dynamictext
+package com.twocoders.util.dynamictext
 
 import android.content.Context
 import android.os.Parcel
@@ -7,12 +7,11 @@ import android.view.View.NO_ID
 import android.widget.TextView
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.kacera.util.dynamictext.test.R
+import com.twocoders.util.dynamictext.test.R
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-
 
 @RunWith(AndroidJUnit4::class)
 class DynamicTextTest {
