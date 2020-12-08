@@ -1,7 +1,7 @@
 ## DynamicText
 Data class which can be used to combine String data with string resource identifiers. Can be used for regular strings or plurals.
 
-Use the library adding `implementation 'com.twocoders:dynamictext:2.1.0'` into your build.gradle file.
+Use the library adding `implementation 'com.twocoders:dynamictext:3.0.0'` into your build.gradle file.
 
 ### Usage
 One of the usage cases this comes handy is when you want to conditionally set either String text or StringRes id to one TextView using data-binding.  
@@ -12,9 +12,9 @@ val title = MutableLiveData<DynamicText>()
 
 fun onDataLoaded(response: Respose) {
     if (response.sucess) {
-        title.value = DynamicText.from(response.data.title)	//data.title is String
+        title.value = DynamicText.from(response.data.title) //-> data.title is String
     } else {
-        title.value = DynamicText.from(R.string.oh_no)	//id of a string from resources is Int
+        title.value = DynamicText.from(R.string.oh_no) //-> id of a string from resources is Int
     }
 }
 ```
