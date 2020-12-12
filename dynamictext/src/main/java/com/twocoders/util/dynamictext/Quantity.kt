@@ -1,5 +1,6 @@
 package com.twocoders.util.dynamictext
 
+import android.os.Build
 import android.os.Parcel
 import android.os.Parcelable
 
@@ -28,12 +29,20 @@ data class Quantity(val number: Int, val useInText: Boolean = false) : Parcelabl
 
     private constructor(parcel: Parcel) : this(
         parcel.readInt(),
-        parcel.readBoolean()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            parcel.readBoolean()
+        } else {
+            parcel.readInt() == 1
+        }
     )
 
     override fun writeToParcel(dest: Parcel, flags: Int) {
         dest.writeInt(number)
-        dest.writeBoolean(useInText)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            dest.writeBoolean(useInText)
+        } else {
+            dest.writeInt(if (useInText) 1 else 0)
+        }
     }
 
     override fun describeContents(): Int = 0

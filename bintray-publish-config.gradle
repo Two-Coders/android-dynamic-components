@@ -1,4 +1,4 @@
-apply plugin: 'com.novoda.bintray-release'
+apply plugin: 'com.github.panpf.bintray-publish'
 
 publish {
     userOrg = organization
@@ -9,6 +9,4 @@ publish {
     desc = projectDescription
     website = projectWebsite
     licences = projectLicences
-    dryRun = false
-    override = false // https://github.com/bintray/gradle-bintray-plugin/issues/283
 }

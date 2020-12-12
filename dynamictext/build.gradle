@@ -1,10 +1,9 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 ext.bintrayPublishVersion = libDynamicTextVersion
-apply from: '../bintrayConfig.gradle'
+apply from: '../bintray-publish-config.gradle'
 
 android {
     compileSdkVersion androidCompileSdkVersion
@@ -24,8 +23,8 @@ android {
         }
     }
 
-    dataBinding {
-        enabled = true
+    buildFeatures {
+        dataBinding = true
     }
 }
 
