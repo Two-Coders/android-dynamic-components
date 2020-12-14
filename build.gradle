@@ -7,7 +7,7 @@ buildscript {
         projectLicences = ['MIT']
 
         androidMinSdkVersion = 21
-        androidCompileSdkVersion = 29
+        androidCompileSdkVersion = 30
         androidTargerSdkVersion = androidCompileSdkVersion
 
         libDynamicTextVersion = '3.0.0'

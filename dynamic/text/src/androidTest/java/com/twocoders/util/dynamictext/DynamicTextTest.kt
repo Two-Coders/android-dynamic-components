@@ -3,8 +3,8 @@ package com.twocoders.util.dynamictext
 import android.content.Context
 import android.os.Parcel
 import android.text.Spanned
-import android.view.View.NO_ID
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat.ID_NULL
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.twocoders.util.dynamictext.test.R
@@ -43,7 +43,7 @@ class DynamicTextTest {
     @Test
     fun dynamicTextWithMultipleTextDataReturnsJoinedText() {
         val expectedText = "Success Text"
-        Assert.assertEquals(expectedText, DynamicText.from(NO_ID ,"Success", "Text").getText(context))
+        Assert.assertEquals(expectedText, DynamicText.from(ID_NULL ,"Success", "Text").getText(context))
     }
 
     @Test
