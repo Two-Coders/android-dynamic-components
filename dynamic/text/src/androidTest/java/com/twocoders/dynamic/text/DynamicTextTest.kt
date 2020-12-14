@@ -1,4 +1,4 @@
-package com.twocoders.util.dynamictext
+package com.twocoders.dynamic.text
 
 import android.content.Context
 import android.os.Parcel
@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat.ID_NULL
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.twocoders.util.dynamictext.test.R
+import com.twocoders.dynamic.text.test.R
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test

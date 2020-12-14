@@ -1,4 +1,4 @@
-package com.twocoders.util.dynamictext
+package com.twocoders.dynamic.text
 
 import android.os.Parcel
 import android.os.Parcelable

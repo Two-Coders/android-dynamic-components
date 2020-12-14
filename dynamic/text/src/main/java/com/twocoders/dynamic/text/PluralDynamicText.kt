@@ -1,4 +1,4 @@
-package com.twocoders.util.dynamictext
+package com.twocoders.dynamic.text
 
 import android.annotation.SuppressLint
 import android.content.Context
