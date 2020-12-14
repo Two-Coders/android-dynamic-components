@@ -1,11 +1,7 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-
 buildscript {
 
     ext {
         organization = 'twocoders'
-        groupIdentifier = 'com.twocoders'
-        projectIdentifier = 'utils'
         projectWebsite = 'https://github.com/Two-Coders/dynamic-text'
         projectDescription = 'Project containing DynamicText utility.'
         projectLicences = ['MIT']
