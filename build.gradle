@@ -7,7 +7,7 @@ buildscript {
         projectLicences = ['MIT']
 
         androidMinSdkVersion = 21
-        androidCompileSdkVersion = 29
+        androidCompileSdkVersion = 30
         androidTargerSdkVersion = androidCompileSdkVersion
 
         libDynamicTextVersion = '3.0.0'
@@ -28,8 +28,8 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.novoda:bintray-release:0.9.2'
-        classpath 'com.android.tools.build:gradle:3.6.4'
+        classpath 'com.android.tools.build:gradle:4.1.1'
+        classpath 'com.github.panpf.bintray-publish:bintray-publish:1.0.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     }
 }

@@ -1,7 +1,7 @@
 ## DynamicText
 Data class which can be used to combine String data with string resource identifiers. Can be used for regular strings or plurals.
 
-Use the library adding `implementation 'com.twocoders:dynamictext:3.0.0'` into your build.gradle file.
+Use the library adding `implementation 'com.twocoders.dynamic:text:3.0.0'` into your build.gradle file.
 
 ### Usage
 One of the usage cases this comes handy is when you want to conditionally set either String text or StringRes id to one TextView using data-binding.  
