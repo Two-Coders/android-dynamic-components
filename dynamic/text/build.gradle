@@ -3,7 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 ext.bintrayPublishVersion = libDynamicTextVersion
-apply from: '../bintray-publish-config.gradle'
+apply from: '../../bintrayConfig.gradle'
 
 android {
     compileSdkVersion androidCompileSdkVersion
