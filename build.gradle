@@ -2,7 +2,6 @@ buildscript {
 
     ext {
         organization = 'twocoders'
-        groupIdentifier = "com.${organization}.binding"
         projectWebsite = 'https://github.com/Two-Coders/dynamic-text'
         projectDescription = 'Project containing DynamicText utility.'
         projectLicences = ['MIT']
