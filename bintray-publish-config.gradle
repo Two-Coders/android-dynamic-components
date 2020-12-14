@@ -8,4 +8,5 @@ publish {
     desc = projectDescription
     website = projectWebsite
     licences = projectLicences
+    override = true // https://github.com/bintray/gradle-bintray-plugin/issues/283
 }
