@@ -2,9 +2,9 @@ apply plugin: 'com.github.panpf.bintray-publish'
 
 publish {
     userOrg = organization
-    groupId = groupIdentifier
+    groupId = "com.$organization.$groupIdentifier"
     artifactId = project.name
-    uploadName = "$projectIdentifier:$project.name"
+    uploadName = "$groupIdentifier:$project.name"
     publishVersion = bintrayPublishVersion
     desc = projectDescription
     website = projectWebsite

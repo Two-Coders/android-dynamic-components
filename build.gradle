@@ -2,9 +2,8 @@ buildscript {
 
     ext {
         organization = 'twocoders'
-        projectIdentifier = 'dynamic'
-        projectWebsite = 'https://github.com/Two-Coders/dynamic-text'
-        projectDescription = 'Project containing DynamicText utility.'
+        projectWebsite = 'https://github.com/Two-Coders/android-dynamic-componets/'
+        projectDescription = 'Project containing useful Dynamic components.'
         projectLicences = ['MIT']
 
         androidMinSdkVersion = 21
