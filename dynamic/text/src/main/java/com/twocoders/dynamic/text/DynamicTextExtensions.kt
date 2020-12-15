@@ -1,3 +1,3 @@
-package com.twocoders.util.dynamictext
+package com.twocoders.dynamic.text
 
 fun String?.toDynamicText() = this?.let { DynamicText.from(it) } ?: DynamicText.EMPTY
