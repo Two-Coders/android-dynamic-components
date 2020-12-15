@@ -5,7 +5,8 @@ import android.os.Parcel
 import android.os.Parcelable
 import androidx.annotation.PluralsRes
 import androidx.annotation.StringRes
-import androidx.core.content.res.ResourcesCompat.ID_NULL
+import com.twocoders.extensions.common.NO_ID
+import com.twocoders.extensions.common.SPACE
 
 /**
  * Handy class which can be used to bind text data to views displaying them.
@@ -23,7 +24,7 @@ open class DynamicText : Parcelable {
     protected var args: Array<out Any?>
 
     protected constructor(
-        @StringRes textResource: Int = ID_NULL,
+        @StringRes textResource: Int = NO_ID,
         vararg args: Any? = emptyArray()
     ) {
         this.textResource = textResource
@@ -43,7 +44,7 @@ open class DynamicText : Parcelable {
         fun from(@StringRes resId: Int) = DynamicText(resId)
 
         @JvmStatic
-        fun from(text: String) = DynamicText(ID_NULL, text)
+        fun from(text: String) = DynamicText(NO_ID, text)
 
         @JvmStatic
         fun from(format: String, vararg args: Any) = from(String.format(format, *args))
@@ -74,18 +75,18 @@ open class DynamicText : Parcelable {
     }
 
     open fun getText(context: Context): CharSequence {
-        if (textResource != ID_NULL && args.isNotEmpty()) {
+        if (textResource != NO_ID && args.isNotEmpty()) {
             return context.getString(textResource, *args)
         }
 
-        if (textResource != ID_NULL) {
+        if (textResource != NO_ID) {
             return context.getText(textResource)
         }
 
-        return args.joinToString(separator = " ") { it.toString() }
+        return args.joinToString(separator = SPACE) { it.toString() }
     }
 
-    fun isEmpty() = textResource == ID_NULL && args.isEmpty()
+    fun isEmpty() = textResource == NO_ID && args.isEmpty()
     fun isNotEmpty() = !isEmpty()
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
