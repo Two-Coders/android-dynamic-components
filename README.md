@@ -1,3 +1,6 @@
+# Dynamic Components
+This project contains a set of useful classes which can be used to hold various data sources regardless of their format.
+
 ## DynamicText
 Data class which can be used to combine String data with string resource identifiers. Can be used for regular strings or plurals.
 
