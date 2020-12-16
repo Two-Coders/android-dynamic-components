@@ -31,7 +31,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
     implementation "androidx.annotation:annotation:$annotationVersion"
     implementation "androidx.core:core-ktx:$androidXCoreVersion"
     implementation "com.twocoders.extensions:common:$commonExtensionsVersion"

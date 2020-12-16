@@ -1,6 +1,7 @@
 package com.twocoders.dynamic.color
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.os.Parcel
 import android.os.Parcelable
 import androidx.annotation.AttrRes
@@ -86,6 +87,8 @@ open class DynamicColor : Parcelable {
 
         return context.getColorInt(android.R.color.transparent)
     }
+
+    open fun getColorStateList(context: Context) = ColorStateList.valueOf(getColor(context))
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(colorInt ?: NO_ID)
