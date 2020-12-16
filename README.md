@@ -53,3 +53,4 @@ Code in layout file:
 ```xml
 <View
     android:background="@{viewModel.backgroundColor}" />
+```
