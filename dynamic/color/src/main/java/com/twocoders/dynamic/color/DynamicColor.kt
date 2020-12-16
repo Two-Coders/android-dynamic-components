@@ -56,13 +56,8 @@ open class DynamicColor : Parcelable {
 
         @JvmField
         val CREATOR = object : Parcelable.Creator<DynamicColor> {
-            override fun createFromParcel(parcel: Parcel): DynamicColor {
-                return DynamicColor(parcel)
-            }
-
-            override fun newArray(size: Int): Array<DynamicColor?> {
-                return arrayOfNulls(size)
-            }
+            override fun createFromParcel(parcel: Parcel) = DynamicColor(parcel)
+            override fun newArray(size: Int): Array<DynamicColor?> = arrayOfNulls(size)
         }
     }
 

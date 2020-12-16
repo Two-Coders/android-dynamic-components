@@ -64,13 +64,8 @@ open class DynamicText : Parcelable {
 
         @JvmField
         val CREATOR = object : Parcelable.Creator<DynamicText> {
-            override fun createFromParcel(parcel: Parcel): DynamicText {
-                return DynamicText(parcel)
-            }
-
-            override fun newArray(size: Int): Array<DynamicText?> {
-                return arrayOfNulls(size)
-            }
+            override fun createFromParcel(parcel: Parcel) = DynamicText(parcel)
+            override fun newArray(size: Int): Array<DynamicText?> = arrayOfNulls(size)
         }
     }
 

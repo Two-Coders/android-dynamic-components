@@ -4,8 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Parcel
 import android.os.Parcelable
-import android.view.View
 import androidx.annotation.PluralsRes
+import com.twocoders.extensions.common.NO_ID
 
 @SuppressLint("ResourceType")
 internal class PluralDynamicText : DynamicText {
@@ -32,13 +32,8 @@ internal class PluralDynamicText : DynamicText {
     companion object {
         @JvmField
         val CREATOR = object : Parcelable.Creator<PluralDynamicText> {
-            override fun createFromParcel(parcel: Parcel): PluralDynamicText {
-                return PluralDynamicText(parcel)
-            }
-
-            override fun newArray(size: Int): Array<PluralDynamicText?> {
-                return arrayOfNulls(size)
-            }
+            override fun createFromParcel(parcel: Parcel) = PluralDynamicText(parcel)
+            override fun newArray(size: Int): Array<PluralDynamicText?> = arrayOfNulls(size)
         }
     }
 
@@ -49,7 +44,7 @@ internal class PluralDynamicText : DynamicText {
             args
         }
 
-        if (textResource != View.NO_ID && quantityArgs.isNotEmpty()) {
+        if (textResource != NO_ID && quantityArgs.isNotEmpty()) {
             return context.resources.getQuantityString(textResource, quantity.number, *quantityArgs)
         }
 
