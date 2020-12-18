@@ -13,8 +13,8 @@ Code in ViewModel:
 ```kotlin
 val title = MutableLiveData<DynamicText>()
 
-fun onDataLoaded(response: Respose) {
-    title.value = if (response.sucess) {
+fun onDataLoaded(response: Response) {
+    title.value = if (response.success) {
         DynamicText.from(response.data.title) //-> data.title is String
     } else {
         DynamicText.from(R.string.oh_no) //-> id of a string from resources is Int
@@ -40,8 +40,8 @@ Code in ViewModel:
 ```kotlin
 val backgroundColor = MutableLiveData<DynamicColor>()
 
-fun onDataLoaded(response: Respose) {
-    backgroundColor.value = if (response.sucess) {
+fun onDataLoaded(response: Response) {
+    backgroundColor.value = if (response.success) {
         DynamicColor.fromColorInt(response.data.backgroundColor) //-> data.backgroundColor is ColorInt
     } else {
         DynamicColor.fromColorRes(R.color.red) //-> R.color.red is ColorRes
