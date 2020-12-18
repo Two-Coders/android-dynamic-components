@@ -115,13 +115,13 @@ class DynamicTextTest {
     @Test
     fun htmlContentBinding() {
         val textView = TextView(context)
-        setHtmlTextHolder(textView, DynamicText.from(R.string.html_escaped))
+        textView.setHtmlDynamicText(DynamicText.from(R.string.html_escaped))
         Assert.assertTrue(textView.text is Spanned)
 
-        setHtmlTextHolder(textView, DynamicText.from(R.string.html_unescaped))
+        textView.setHtmlDynamicText(DynamicText.from(R.string.html_unescaped))
         Assert.assertTrue(textView.text is Spanned)
 
-        setHtmlTextHolder(textView, DynamicText.from(R.string.no_html))
+        textView.setHtmlDynamicText(DynamicText.from(R.string.no_html))
         Assert.assertFalse(textView.text is Spanned)
     }
 
