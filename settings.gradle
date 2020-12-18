@@ -1,1 +1,2 @@
-include ':dynamic:text'
+include ':dynamic:text',
+        ':dynamic:color'
