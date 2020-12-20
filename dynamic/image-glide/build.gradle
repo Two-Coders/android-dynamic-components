@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
-ext.bintrayPublishVersion = libDynamicImageCoilVersion
+ext.bintrayPublishVersion = libDynamicImageGlideVersion
 apply from: '../../bintray-publish-config.gradle'
 
 android {
@@ -11,7 +11,7 @@ android {
     defaultConfig {
         minSdkVersion androidMinSdkVersion
         targetSdkVersion androidTargerSdkVersion
-        versionName libDynamicImageCoilVersion
+        versionName libDynamicImageGlideVersion
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
@@ -47,7 +47,7 @@ dependencies {
     implementation "androidx.core:core-ktx:$androidXCoreVersion"
     implementation "com.twocoders.extensions:common:$commonExtensionsVersion"
 
-    implementation "io.coil-kt:coil:$coilVersion"
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
 
     androidTestImplementation "androidx.test:runner:$androidTestRunnerVersion"
     androidTestImplementation "androidx.test.ext:junit:$androidJunitVersion"

@@ -1,17 +1,18 @@
-package com.twocoders.dynamic.image.coil
+package com.twocoders.dynamic.image.glide
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import android.graphics.drawable.VectorDrawable
 import android.os.Parcel
 import android.os.Parcelable
 import android.widget.ImageView
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
-import coil.Coil
-import coil.ImageLoader
-import coil.load
-import coil.request.ImageRequest
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.twocoders.dynamic.image.BaseDynamicImage
 import com.twocoders.dynamic.image.component.UriComponent
 
@@ -24,7 +25,7 @@ import com.twocoders.dynamic.image.component.UriComponent
  * and [DynamicImage.getDrawable] to obtain the final [Drawable] output. Or you can
  * provide target [ImageView] class into the [DynamicImage.loadDrawableInto] method.
  *
- * This [DynamicImage] implementation uses [Coil], for other implementations please visit our GitHub.
+ * This [DynamicImage] implementation uses [Glide], for other implementations please visit our GitHub.
  *
  */
 @Suppress("unused", "MemberVisibilityCanBePrivate")
@@ -60,10 +61,14 @@ open class DynamicImage : BaseDynamicImage {
 
     override suspend fun getDrawable(context: Context): Drawable? {
         imageUri?.let { uri ->
-            val request = ImageRequest.Builder(context)
-                .data(uri)
-                .build()
-            return ImageLoader(context).execute(request).drawable
+            return BitmapDrawable(
+                context.resources,
+                Glide.with(context)
+                    .asBitmap()
+                    .load(uri.image)
+                    .submit()
+                    .get()
+            )
         }
 
         return super.getDrawable(context)
@@ -71,11 +76,15 @@ open class DynamicImage : BaseDynamicImage {
 
     override fun getDrawable(context: Context, callback: (drawable: Drawable) -> Unit) {
         imageUri?.let { imageUriComponent ->
-            val request = ImageRequest.Builder(context)
-                .data(imageUriComponent.image)
-                .target { callback(it) }
-                .build()
-            ImageLoader(context).enqueue(request)
+            Glide.with(context)
+                .asBitmap()
+                .load(imageUriComponent.image)
+                .into(object : CustomTarget<Bitmap>(){
+                    override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                        callback(BitmapDrawable(context.resources, resource))
+                    }
+                    override fun onLoadCleared(placeholder: Drawable?) {}
+                })
         }
 
         super.getDrawable(context, callback)
@@ -86,37 +95,32 @@ open class DynamicImage : BaseDynamicImage {
         withCrossFade: Boolean
     ) {
         imageUri?.let { imageUriComponent ->
-            imageView.load(imageUriComponent.image) {
-                crossfade(withCrossFade)
-                imageUriComponent.placeholderImage?.let { placeholder(it) }
-                imageUriComponent.errorImage?.let { error(it) }
-            }
+            Glide.with(imageView.context)
+                .load(imageUriComponent.image)
+                .apply {
+                    if (withCrossFade) transition(DrawableTransitionOptions.withCrossFade())
+                    imageUriComponent.placeholderImage?.let { placeholder(it) }
+                    imageUriComponent.errorImage?.let { error(it) }
+                }
+                .into(imageView)
         }
 
         imageDrawable?.let {
-            // Note: Coil has currently issue with loading vectors
-            if (it is VectorDrawable) {
-                imageView.setImageDrawable(it)
-            } else {
-                imageView.load(it) {
-                    crossfade(withCrossFade)
+            Glide.with(imageView.context)
+                .load(it)
+                .apply {
+                    if (withCrossFade) transition(DrawableTransitionOptions.withCrossFade())
                 }
-            }
+                .into(imageView)
         }
 
         imageRes?.let {
-            // We need to get drawable before setting it to imageView through Coil,
-            // there is a problem with background tint from theme attribute
-            getDrawable(imageView.context) { drawable ->
-                // Note: Coil has currently issue with loading vectors
-                if (drawable is VectorDrawable) {
-                    imageView.setImageDrawable(drawable)
-                } else {
-                    imageView.load(drawable) {
-                        crossfade(withCrossFade)
-                    }
+            Glide.with(imageView.context)
+                .load(it)
+                .apply {
+                    if (withCrossFade) transition(DrawableTransitionOptions.withCrossFade())
                 }
-            }
+                .into(imageView)
         }
     }
 }

@@ -7,10 +7,12 @@ import android.graphics.drawable.Drawable
 import android.os.Parcel
 import android.os.Parcelable
 import android.widget.ImageView
+import androidx.annotation.CallSuper
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import com.twocoders.dynamic.image.component.UriComponent
 import com.twocoders.extensions.common.NO_ID
+import com.twocoders.extensions.common.getDrawable
 import com.twocoders.extensions.common.logd
 
 /**
@@ -41,9 +43,29 @@ abstract class BaseDynamicImage : Parcelable {
         parcel.readParcelable(UriComponent::class.java.classLoader)
     )
 
-    abstract suspend fun getDrawable(context: Context): Drawable?
+    @CallSuper
+    open suspend fun getDrawable(context: Context): Drawable? {
+        imageDrawable?.let { drawable ->
+            return drawable
+        }
 
-    abstract fun getDrawable(context: Context, callback: (drawable: Drawable) -> Unit)
+        imageRes?.let { res ->
+            return context.getDrawable(drawableResId = res)
+        }
+
+        return null
+    }
+
+    @CallSuper
+    open fun getDrawable(context: Context, callback: (drawable: Drawable) -> Unit) {
+        imageDrawable?.let { drawable ->
+            callback(drawable)
+        }
+
+        imageRes?.let { res ->
+            context.getDrawable(drawableResId = res)?.let { callback(it) }
+        }
+    }
 
     abstract fun loadDrawableInto(imageView: ImageView, withCrossFade: Boolean = false)
 

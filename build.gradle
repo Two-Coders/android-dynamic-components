@@ -13,6 +13,8 @@ buildscript {
         libDynamicColorVersion = '1.0.0'
         libDynamicImageVersion = '1.0.0'
         libDynamicImageCoilVersion = '1.0.0'
+        libDynamicImageGlideVersion = '1.0.0'
+        libDynamicImagePicassoVersion = '1.0.0'
         libDynamicTextVersion = '3.0.0'
 
         kotlinVersion = '1.4.21'
@@ -20,6 +22,8 @@ buildscript {
         annotationVersion = '1.1.0'
         commonExtensionsVersion = '1.0.0'
         coilVersion = '1.1.0'
+        glideVersion = '4.11.0'
+        picassoVersion = '2.71828'
 
         junitVersion = '4.13.1'
         androidTestRunnerVersion = '1.3.0'
