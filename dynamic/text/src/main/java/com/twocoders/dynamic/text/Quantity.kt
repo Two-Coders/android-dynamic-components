@@ -37,7 +37,7 @@ data class Quantity(val number: Int, val useInText: Boolean = false) : Parcelabl
         ParcelCompat.writeBoolean(dest, useInText)
     }
 
-    override fun describeContents(): Int = 0
+    override fun describeContents() = 0
 
     companion object {
         @JvmField

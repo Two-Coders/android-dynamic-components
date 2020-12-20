@@ -1,2 +1,4 @@
 include ':dynamic:text',
-        ':dynamic:color'
+        ':dynamic:color',
+        ':dynamic:image',
+        ':dynamic:image-coil'
