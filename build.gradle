@@ -2,7 +2,7 @@ buildscript {
 
     ext {
         organization = 'twocoders'
-        projectWebsite = 'https://github.com/Two-Coders/android-dynamic-componets/'
+        projectWebsite = 'https://github.com/Two-Coders/android-dynamic-components/'
         projectDescription = 'Project containing useful Dynamic components.'
         projectLicences = ['MIT']
 
@@ -11,7 +11,6 @@ buildscript {
         androidTargerSdkVersion = androidCompileSdkVersion
 
         libDynamicColorVersion = '1.0.0'
-        libDynamicImageVersion = '1.0.0'
         libDynamicImageCoilVersion = '1.0.0'
         libDynamicImageGlideVersion = '1.0.0'
         libDynamicImagePicassoVersion = '1.0.0'

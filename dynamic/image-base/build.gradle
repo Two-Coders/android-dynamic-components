@@ -8,9 +8,12 @@ android {
     defaultConfig {
         minSdkVersion androidMinSdkVersion
         targetSdkVersion androidTargerSdkVersion
-        versionName libDynamicImageVersion
 
         consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildFeatures {
+        dataBinding = true
     }
 
     buildTypes {

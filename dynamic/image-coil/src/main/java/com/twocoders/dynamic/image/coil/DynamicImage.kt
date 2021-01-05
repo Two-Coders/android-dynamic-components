@@ -12,19 +12,20 @@ import coil.Coil
 import coil.ImageLoader
 import coil.load
 import coil.request.ImageRequest
-import com.twocoders.dynamic.image.BaseDynamicImage
-import com.twocoders.dynamic.image.component.UriComponent
+import com.twocoders.dynamic.image.base.BaseDynamicImage
+import com.twocoders.dynamic.image.base.component.UriComponent
 
 /**
  *
- * Handy class which can be used to bind image data to views using them.
+ * Handy class which can be used to bind image data to views.
  * Data can be in [DrawableRes], [Drawable], or [UriComponent] format.
  *
  * Use one of [DynamicImage.from] creator methods to create the data
  * and [DynamicImage.getDrawable] to obtain the final [Drawable] output. Or you can
  * provide target [ImageView] class into the [DynamicImage.loadDrawableInto] method.
  *
- * This [DynamicImage] implementation uses [Coil], for other implementations please visit our GitHub.
+ * This [DynamicImage] implementation uses [Coil], for other implementations please visit our GitHub:
+ * [Android Dynamic Components](https://github.com/Two-Coders/android-dynamic-components)
  *
  */
 @Suppress("unused", "MemberVisibilityCanBePrivate")
@@ -58,27 +59,27 @@ open class DynamicImage : BaseDynamicImage {
         }
     }
 
-    override suspend fun getDrawable(context: Context): Drawable? {
-        imageUri?.let { uri ->
-            val request = ImageRequest.Builder(context)
-                .data(uri)
-                .build()
-            return ImageLoader(context).execute(request).drawable
-        }
-
-        return super.getDrawable(context)
+    override suspend fun getDrawableFromUri(
+        context: Context,
+        imageUriComponent: UriComponent
+    ): Drawable? {
+        val request = ImageRequest.Builder(context)
+            .data(imageUriComponent.image)
+            .build()
+        return ImageLoader(context).execute(request).drawable
     }
 
-    override fun getDrawable(context: Context, callback: (drawable: Drawable) -> Unit) {
-        imageUri?.let { imageUriComponent ->
-            val request = ImageRequest.Builder(context)
+    override fun getDrawableFromUri(
+        context: Context,
+        imageUriComponent: UriComponent,
+        callback: (drawable: Drawable) -> Unit
+    ) {
+        ImageLoader(context).enqueue(
+            ImageRequest.Builder(context)
                 .data(imageUriComponent.image)
                 .target { callback(it) }
                 .build()
-            ImageLoader(context).enqueue(request)
-        }
-
-        super.getDrawable(context, callback)
+        )
     }
 
     override fun loadDrawableInto(

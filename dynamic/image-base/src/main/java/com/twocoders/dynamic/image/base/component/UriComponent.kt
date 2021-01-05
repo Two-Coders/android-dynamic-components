@@ -1,4 +1,4 @@
-package com.twocoders.dynamic.image.component
+package com.twocoders.dynamic.image.base.component
 
 import android.net.Uri
 import android.os.Parcel

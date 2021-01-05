@@ -1,4 +1,4 @@
-package com.twocoders.dynamic.image
+package com.twocoders.dynamic.image.base
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -7,17 +7,16 @@ import android.graphics.drawable.Drawable
 import android.os.Parcel
 import android.os.Parcelable
 import android.widget.ImageView
-import androidx.annotation.CallSuper
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
-import com.twocoders.dynamic.image.component.UriComponent
+import com.twocoders.dynamic.image.base.component.UriComponent
 import com.twocoders.extensions.common.NO_ID
 import com.twocoders.extensions.common.getDrawable
 import com.twocoders.extensions.common.logd
 
 /**
  *
- * Handy class which can be used to bind image data to views using them.
+ * Handy class which can be used to bind image data to views.
  * Data can be in [DrawableRes], [Drawable], or [UriComponent] format.
  */
 @Suppress("unused", "MemberVisibilityCanBePrivate")
@@ -43,8 +42,22 @@ abstract class BaseDynamicImage : Parcelable {
         parcel.readParcelable(UriComponent::class.java.classLoader)
     )
 
-    @CallSuper
+    protected abstract suspend fun getDrawableFromUri(
+        context: Context,
+        imageUriComponent: UriComponent
+    ): Drawable?
+
+    protected abstract fun getDrawableFromUri(
+        context: Context,
+        imageUriComponent: UriComponent,
+        callback: (drawable: Drawable) -> Unit
+    )
+
     open suspend fun getDrawable(context: Context): Drawable? {
+        imageUri?.let { imageUriComponent ->
+            return getDrawableFromUri(context, imageUriComponent)
+        }
+
         imageDrawable?.let { drawable ->
             return drawable
         }
@@ -56,8 +69,11 @@ abstract class BaseDynamicImage : Parcelable {
         return null
     }
 
-    @CallSuper
     open fun getDrawable(context: Context, callback: (drawable: Drawable) -> Unit) {
+        imageUri?.let { imageUriComponent ->
+            getDrawableFromUri(context, imageUriComponent, callback)
+        }
+
         imageDrawable?.let { drawable ->
             callback(drawable)
         }

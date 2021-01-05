@@ -13,19 +13,20 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
-import com.twocoders.dynamic.image.BaseDynamicImage
-import com.twocoders.dynamic.image.component.UriComponent
+import com.twocoders.dynamic.image.base.BaseDynamicImage
+import com.twocoders.dynamic.image.base.component.UriComponent
 
 /**
  *
- * Handy class which can be used to bind image data to views using them.
+ * Handy class which can be used to bind image data to views.
  * Data can be in [DrawableRes], [Drawable], or [UriComponent] format.
  *
  * Use one of [DynamicImage.from] creator methods to create the data
  * and [DynamicImage.getDrawable] to obtain the final [Drawable] output. Or you can
  * provide target [ImageView] class into the [DynamicImage.loadDrawableInto] method.
  *
- * This [DynamicImage] implementation uses [Glide], for other implementations please visit our GitHub.
+ * This [DynamicImage] implementation uses [Glide], for other implementations please visit our GitHub:
+ * [Android Dynamic Components](https://github.com/Two-Coders/android-dynamic-components)
  *
  */
 @Suppress("unused", "MemberVisibilityCanBePrivate")
@@ -59,35 +60,32 @@ open class DynamicImage : BaseDynamicImage {
         }
     }
 
-    override suspend fun getDrawable(context: Context): Drawable? {
-        imageUri?.let { uri ->
-            return BitmapDrawable(
-                context.resources,
-                Glide.with(context)
-                    .asBitmap()
-                    .load(uri.image)
-                    .submit()
-                    .get()
-            )
-        }
+    override suspend fun getDrawableFromUri(
+        context: Context,
+        imageUriComponent: UriComponent
+    ) = BitmapDrawable(
+        context.resources,
+        Glide.with(context)
+            .asBitmap()
+            .load(imageUriComponent.image)
+            .submit()
+            .get()
+    )
 
-        return super.getDrawable(context)
-    }
-
-    override fun getDrawable(context: Context, callback: (drawable: Drawable) -> Unit) {
-        imageUri?.let { imageUriComponent ->
-            Glide.with(context)
-                .asBitmap()
-                .load(imageUriComponent.image)
-                .into(object : CustomTarget<Bitmap>(){
-                    override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                        callback(BitmapDrawable(context.resources, resource))
-                    }
-                    override fun onLoadCleared(placeholder: Drawable?) {}
-                })
-        }
-
-        super.getDrawable(context, callback)
+    override fun getDrawableFromUri(
+        context: Context,
+        imageUriComponent: UriComponent,
+        callback: (drawable: Drawable) -> Unit
+    ) {
+        Glide.with(context)
+            .asBitmap()
+            .load(imageUriComponent.image)
+            .into(object : CustomTarget<Bitmap>() {
+                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                    callback(BitmapDrawable(context.resources, resource))
+                }
+                override fun onLoadCleared(placeholder: Drawable?) {}
+            })
     }
 
     override fun loadDrawableInto(
