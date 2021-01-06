@@ -17,12 +17,6 @@ android {
         consumerProguardFiles 'consumer-rules.pro'
     }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-        }
-    }
-
     buildFeatures {
         dataBinding = true
     }
