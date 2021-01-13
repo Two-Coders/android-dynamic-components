@@ -2,18 +2,13 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
-ext.bintrayPublishVersion = libDynamicTextVersion
-apply from: '../../bintray-publish-config.gradle'
-
 android {
     compileSdkVersion androidCompileSdkVersion
 
     defaultConfig {
         minSdkVersion androidMinSdkVersion
         targetSdkVersion androidTargerSdkVersion
-        versionName libDynamicTextVersion
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
     }
 
@@ -27,11 +22,5 @@ dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
     implementation "androidx.annotation:annotation:$annotationVersion"
-    implementation "androidx.core:core-ktx:$androidXCoreVersion"
     implementation "com.twocoders.extensions:common:$commonExtensionsVersion"
-
-    androidTestImplementation "androidx.test:runner:$androidTestRunnerVersion"
-    androidTestImplementation "androidx.test.ext:junit:$androidJunitVersion"
-
-    testImplementation "junit:junit:$junitVersion"
 }

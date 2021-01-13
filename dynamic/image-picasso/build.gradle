@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
-ext.bintrayPublishVersion = libDynamicTextVersion
+ext.bintrayPublishVersion = libDynamicImagePicassoVersion
 apply from: '../../bintray-publish-config.gradle'
 
 android {
@@ -11,7 +11,7 @@ android {
     defaultConfig {
         minSdkVersion androidMinSdkVersion
         targetSdkVersion androidTargerSdkVersion
-        versionName libDynamicTextVersion
+        versionName libDynamicImagePicassoVersion
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
@@ -20,15 +20,31 @@ android {
     buildFeatures {
         dataBinding = true
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    api project(':dynamic:image-base')
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
     implementation "androidx.annotation:annotation:$annotationVersion"
     implementation "androidx.core:core-ktx:$androidXCoreVersion"
     implementation "com.twocoders.extensions:common:$commonExtensionsVersion"
+
+    implementation ("com.squareup.picasso:picasso:$picassoVersion") {
+        exclude group: 'com.android.support'
+        exclude module: ['exifinterface', 'support-annotations']
+    }
 
     androidTestImplementation "androidx.test:runner:$androidTestRunnerVersion"
     androidTestImplementation "androidx.test.ext:junit:$androidJunitVersion"

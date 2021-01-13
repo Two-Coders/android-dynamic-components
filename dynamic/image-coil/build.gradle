@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
-ext.bintrayPublishVersion = libDynamicTextVersion
+ext.bintrayPublishVersion = libDynamicImageCoilVersion
 apply from: '../../bintray-publish-config.gradle'
 
 android {
@@ -11,7 +11,7 @@ android {
     defaultConfig {
         minSdkVersion androidMinSdkVersion
         targetSdkVersion androidTargerSdkVersion
-        versionName libDynamicTextVersion
+        versionName libDynamicImageCoilVersion
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
@@ -20,18 +20,39 @@ android {
     buildFeatures {
         dataBinding = true
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+    testOptions {
+        unitTests {
+            returnDefaultValues = true
+            includeAndroidResources = true
+        }
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    api project(':dynamic:image-base')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
     implementation "androidx.annotation:annotation:$annotationVersion"
     implementation "androidx.core:core-ktx:$androidXCoreVersion"
     implementation "com.twocoders.extensions:common:$commonExtensionsVersion"
 
+    implementation "io.coil-kt:coil:$coilVersion"
+
     androidTestImplementation "androidx.test:runner:$androidTestRunnerVersion"
     androidTestImplementation "androidx.test.ext:junit:$androidJunitVersion"
+    androidTestImplementation "org.mockito:mockito-android:$mockitoVersion"
 
     testImplementation "junit:junit:$junitVersion"
 }
