@@ -29,6 +29,13 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+
+    testOptions {
+        unitTests {
+            returnDefaultValues = true
+            includeAndroidResources = true
+        }
+    }
 }
 
 dependencies {
@@ -45,6 +52,7 @@ dependencies {
 
     androidTestImplementation "androidx.test:runner:$androidTestRunnerVersion"
     androidTestImplementation "androidx.test.ext:junit:$androidJunitVersion"
+    androidTestImplementation "org.mockito:mockito-android:$mockitoVersion"
 
     testImplementation "junit:junit:$junitVersion"
 }

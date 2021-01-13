@@ -69,7 +69,12 @@ abstract class BaseDynamicImage : Parcelable {
         return null
     }
 
-    open fun getDrawable(context: Context, callback: (drawable: Drawable) -> Unit) {
+    open fun getDrawable(context: Context, callback: (drawable: Drawable?) -> Unit) {
+        if (isEmpty()) {
+            callback(null)
+            return
+        }
+
         imageUri?.let { imageUriComponent ->
             getDrawableFromUri(context, imageUriComponent, callback)
         }

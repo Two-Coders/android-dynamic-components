@@ -25,6 +25,7 @@ buildscript {
         picassoVersion = '2.71828'
 
         junitVersion = '4.13.1'
+        mockitoVersion = '3.7.0'
         androidTestRunnerVersion = '1.3.0'
         androidJunitVersion = '1.1.2'
     }
